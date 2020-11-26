@@ -24,6 +24,7 @@ const reducer = (state, action) => {
         success: action.payload.success,
         token: action.payload.token,
       };
+
     case "LOGOUT":
       localStorage.clear();
       return {
@@ -38,7 +39,6 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-
   React.useEffect(() => {
     const success = JSON.parse(localStorage.getItem("success") || null);
     const token = JSON.parse(localStorage.getItem("token") || null);
@@ -52,7 +52,18 @@ function App() {
         },
       });
     }
+
+    console.log(
+      "USE_EFFECT: \n",
+      "\n  -SUCCES: ",
+      success,
+      "\n  -TOKEN: ",
+      token
+    );
   }, []);
+
+  console.log("STATE: \n", state, "\n\nDISPATCH: \n", dispatch);
+
   return (
     <AuthContext.Provider
       value={{
